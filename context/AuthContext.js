@@ -17,6 +17,24 @@ export const AuthProvider = ({ children }) => {
   const register = async ({ fullname, email, password }) => {
     setIsLoading(true)
     console.log(fullname, email, password)
+
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fullname, email, password }),
+    })
+
+    const resData = await res.json()
+
+    if (res.ok) {
+      setUser(resData.user)
+      router.push('/dashboard')
+    } else {
+      setError(resData.message)
+      setError(null)
+    }
   }
 
   // Login user
