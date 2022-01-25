@@ -1,7 +1,7 @@
 import cookie from 'cookie'
-import { API_URL } from '../config/index'
+import { API_URL } from '../../config/index'
 
-export default async (req, res) => {
+export default login = async (req, res) => {
   // checking if is a post request
   if (req.method === 'POST') {
     // destructure email, and password

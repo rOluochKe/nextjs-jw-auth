@@ -1,10 +1,10 @@
-import { API_URL } from '@/lib/index'
+import { API_URL } from '../../config/index'
 import cookie from 'cookie'
 
-export default async (req, res) => {
+export default user = async (req, res) => {
   if (req.method === 'GET') {
     if (!req.headers.cookie) {
-      res.status(403).json({message: 'Not Authorized'})
+      res.status(403).json({ message: 'Not Authorized' })
       return
     }
 
@@ -13,22 +13,19 @@ export default async (req, res) => {
     const apiRes = await fetch(`${API_URL}/user`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     })
 
     const user = await apiRes.json()
 
-    if(apiRes.ok) {
-      res.status(200).json({user})
+    if (apiRes.ok) {
+      res.status(200).json({ user })
     } else {
-      res.status(403).json({message: 'User forbidden'})
+      res.status(403).json({ message: 'User forbidden' })
     }
   } else {
     res.setHeader('Allow', ['POST'])
     res.status(405).json({ message: `Method ${req.method} not allowed` })
   }
 }
-
-
-export default user

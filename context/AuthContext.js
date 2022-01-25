@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   // Logout user
-  const logout = () => {
+  const logout = async () => {
     console.log('User Logged out')
 
     const res = await fetch(`${NEXT_URL}/api/logout`, {
